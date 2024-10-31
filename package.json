@@ -11,7 +11,8 @@
 		"typecheck": "tsc",
 		"test": "vitest --run --passWithNoTests",
 		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build"
+		"build-storybook": "storybook build",
+		"scaffdog": "scaffdog generate"
 	},
 	"dependencies": {
 		"@remix-run/node": "^2.13.1",
@@ -32,8 +33,9 @@
 		"@storybook/react": "^8.3.6",
 		"@storybook/react-vite": "^8.3.6",
 		"@storybook/test": "^8.3.6",
-		"@types/react": "^18.2.20",
-		"@types/react-dom": "^18.2.7",
+		"@testing-library/jest-dom": "^6.6.2",
+		"@testing-library/react": "^16.0.1",
+		"@testing-library/user-event": "^14.5.2",
 		"@typescript-eslint/eslint-plugin": "^6.7.4",
 		"@typescript-eslint/parser": "^6.7.4",
 		"autoprefixer": "^10.4.19",
@@ -44,8 +46,10 @@
 		"eslint-plugin-react": "^7.33.2",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-storybook": "^0.10.1",
+		"jsdom": "^25.0.1",
 		"lefthook": "^1.8.2",
 		"postcss": "^8.4.38",
+		"scaffdog": "^4.1.0",
 		"storybook": "^8.3.6",
 		"tailwindcss": "^3.4.4",
 		"typescript": "^5.1.6",
