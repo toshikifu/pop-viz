@@ -9,8 +9,10 @@ declare module "@remix-run/node" {
 }
 
 export default defineConfig({
+  base: "/pop-viz/",
   plugins: [
     remix({
+      basename: "/pop-viz/",
       ssr: false,
       future: {
         v3_fetcherPersist: true,
