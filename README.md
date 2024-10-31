@@ -1,51 +1,97 @@
-# templates/spa
+# プロジェクトドキュメント
 
-This template leverages [Remix SPA Mode](https://remix.run/docs/en/main/guides/spa-mode) to build your app as a Single-Page Application using [Client Data](https://remix.run/docs/en/main/guides/client-data) for all of your data loads and mutations.
+## 🚀 技術スタック
 
-## Setup
+### フロントエンド
+- **Remix**: フルスタックWebフレームワーク
+- **React**: UIライブラリ
+- **TypeScript**: 静的型付け言語
+- **Tailwind CSS**: ユーティリティファーストCSSフレームワーク
 
-```shellscript
-npx create-remix@latest --template remix-run/remix/templates/spa
-```
+### バックエンド
+- **Remix**: サーバーサイドロジック
+- **RESAS API**: 外部APIとの連携
 
-## Development
+### 開発ツール
+- **Biome**: リンター・フォーマッター
+- **Vitest**: テストフレームワーク
+- **Storybook**: UIカタログ
+- **scaffdog**: スキャフォールディングツール
 
-You can develop your SPA app just like you would a normal Remix app, via:
+### その他
+- **Git**: バージョン管理
+- **GitHub Actions**: CI/CD
+- **Vercel**: ホスティング
+- **npm**: パッケージマネージャー
 
-```shellscript
-npm run dev
-```
+## 💡 技術採用の理由
 
-## Production
+1. **Remix**
+   - 採用理由：最新のWeb標準に焦点を当てた高速なフルスタックフレームワーク
+   - メリット：
+     - サーバーサイドレンダリングによる優れたパフォーマンス
+     - 直感的なルーティングシステム
+     - データローディングの最適化
 
-When you are ready to build a production version of your app, `npm run build` will generate your assets and an `index.html` for the SPA.
+2. **React**
+   - 採用理由：広く採用されている信頼性の高いUIライブラリ
+   - メリット：
+     - 豊富なエコシステムとコミュニティサポート
+     - コンポーネントベースの開発による再利用性
+     - 仮想DOMによる効率的な更新
 
-```shellscript
-npm run build
-```
+3. **TypeScript**
+   - 採用理由：静的型付けによるコード品質の向上
+   - メリット：
+     - 開発時のエラー検出
+     - コードの可読性と保守性の向上
+     - IDEのサポートによる開発効率の向上
 
-### Preview
+4. **Tailwind CSS**
+   - 採用理由：高速なUI開発を可能にするユーティリティファーストのアプローチ
+   - メリット：
+     - カスタマイズ性の高いデザインシステム
+     - 小さなバンドルサイズ
+     - 一貫したデザイン言語の適用が容易
 
-You can preview the build locally with [vite preview](https://vitejs.dev/guide/cli#vite-preview) to serve all routes via the single `index.html` file:
+5. **Biome**
+   - 採用理由：高速で包括的なコード品質ツール
+   - メリット：
+     - リンティングとフォーマットの統合
+     - 設定の簡素化
+     - 高速な実行速度
 
-```shellscript
-npm run preview
-```
+6. **Vitest**
+   - 採用理由：Viteベースの高速なテストフレームワーク
+   - メリット：
+     - Jestとの互換性
+     - 高速な実行と並行テスト
+     - TypeScriptのネイティブサポート
 
-> [!IMPORTANT]
->
-> `vite preview` is not designed for use as a production server
+7. **Storybook**
+   - 採用理由：UIコンポーネントの開発と文書化のための業界標準ツール
+   - メリット：
+     - コンポーネントの独立した開発と検証
+     - インタラクティブなドキュメンテーション
+     - デザイナーとの協業を促進
 
-### Deployment
+8. **Recharts**
+   - 採用理由：Reactに最適化されたチャートライブラリ
+   - メリット：
+     - 宣言的なAPIで使いやすい
+     - カスタマイズ性が高い
+     - 再利用可能なチャートコンポーネント
 
-You can then serve your app from any HTTP server of your choosing. The server should be configured to serve multiple paths from a single root `/index.html` file (commonly called "SPA fallback"). Other steps may be required if the server doesn't directly support this functionality.
+9. **GitHub Actions**
+   - 採用理由：GitHubに統合されたCI/CDソリューション
+   - メリット：
+     - リポジトリと密接に統合
+     - 柔軟なワークフロー設定
+     - 無料枠が十分に用意されている
 
-For a simple example, you could use [sirv-cli](https://www.npmjs.com/package/sirv-cli):
-
-```shellscript
-npx sirv-cli build/client/ --single
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+10. **Vercel**
+    - 採用理由：Remixプロジェクトに最適化されたホスティングプラットフォーム
+    - メリット：
+      - シームレスなデプロイメント
+      - エッジでのサーバーサイドレンダリング
+      - 組み込みの分析と監視機能
