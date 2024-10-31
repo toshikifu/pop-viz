@@ -12,20 +12,23 @@ declare module "@remix-run/node" {
 export default defineConfig({
 	base: "/pop-viz/",
 	plugins: [
-		remix({
-			basename: "/pop-viz/",
-			ssr: false,
-			future: {
-				v3_fetcherPersist: true,
-				v3_relativeSplatPath: true,
-				v3_throwAbortReason: true,
-				v3_singleFetch: true,
-				v3_lazyRouteDiscovery: true,
-			},
-		}),
+		!process.env.VITEST &&
+			remix({
+				basename: "/pop-viz/",
+				ssr: false,
+				future: {
+					v3_fetcherPersist: true,
+					v3_relativeSplatPath: true,
+					v3_throwAbortReason: true,
+					v3_singleFetch: true,
+					v3_lazyRouteDiscovery: true,
+				},
+			}),
 		tsconfigPaths(),
 	],
 	test: {
 		globals: true,
+		environment: "jsdom",
+		setupFiles: ["./vitest-setup.ts"],
 	},
 });
