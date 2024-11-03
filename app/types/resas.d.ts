@@ -1,6 +1,6 @@
 // src/types/resas.d.ts
 export interface Prefecture {
-	prefCode: number;
+	prefCode: string;
 	prefName: string;
 }
 
@@ -30,6 +30,6 @@ export interface ResasResponse<T> {
 	result: T;
 }
 export interface FetchPopulationOptions {
-	prefCode: number;
+	prefCode: string;
 	addArea?: string; // "1_,13_" や "1_01100,13_13101" などの形式で複数エリアを指定
 }
