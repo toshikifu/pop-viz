@@ -43,7 +43,7 @@ export default function Index() {
 							value={prefecture.prefCode}
 							defaultChecked={searchParams
 								.getAll("prefCode")
-								.includes(prefecture.prefCode)}
+								.includes(prefecture.prefCode.toString())}
 						/>
 						{prefecture.prefName}
 					</label>
