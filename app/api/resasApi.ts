@@ -23,16 +23,13 @@ export const fetchPopulationComposition = async ({
 	addArea,
 }: FetchPopulationOptions): Promise<PopulationCompositionResponse> => {
 	try {
-		const params: Record<string, unknown> = { prefCode };
-
-		if (addArea) {
-			params.addArea = addArea; // カンマ区切りのaddAreaパラメータを追加
-		}
-
 		const response = await axiosClient.get<
 			ResasResponse<PopulationCompositionResponse>
 		>("/population/composition/perYear", {
-			params,
+			params: {
+				prefCode,
+				addArea,
+			},
 		});
 		return response.data.result;
 	} catch (error) {
