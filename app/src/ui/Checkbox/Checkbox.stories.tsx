@@ -4,7 +4,7 @@ import Checkbox from "./";
 
 const meta: Meta<typeof Checkbox> = {
 	component: Checkbox,
-	title: "app/src/Checkbox",
+	title: "app/src/ui/Checkbox",
 };
 
 export default meta;
