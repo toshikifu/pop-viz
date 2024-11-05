@@ -4,7 +4,5 @@
 
 html,
 body {
-	@media (prefers-color-scheme: dark) {
-		color-scheme: dark;
-	}
+	@apply bg-[#E7EBF0];
 }
