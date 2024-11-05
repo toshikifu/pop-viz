@@ -8,6 +8,11 @@ import { fetchPopulationComposition, fetchPrefectures } from "~/api/resasApi";
 import Button from "~/src/ui/Button";
 import Card from "~/src/ui/Card";
 import Checkbox from "~/src/ui/Checkbox";
+import PopulationChart from "~/src/views/PopulationChart";
+import {
+	PopulationCategory,
+	transformPopulationData,
+} from "~/utils/transform-population-data";
 
 export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
 	const prefectures = await fetchPrefectures();
@@ -34,6 +39,11 @@ export default function Index() {
 	const getPrefNameByIndex = (index: number) => {
 		return prefectures.at(index)?.prefName;
 	};
+
+	const transformedData = transformPopulationData(
+		prefCodes,
+		populationData || [],
+	);
 	return (
 		<>
 			<Form method="get">
@@ -66,28 +76,12 @@ export default function Index() {
 			</Form>
 
 			<h2 className="mt-6 text-4xl">人口推移グラフ</h2>
-			<Card className="p-3">
-				{populationData?.map((data, index) => (
-					<div key={data.boundaryYear}>
-						<h3 className="text-2xl">
-							{getPrefNameByIndex(index)} - {data.data[0].label}
-						</h3>
-						{data.data.map((population) => (
-							<>
-								<p key={population.label}>{population.label}</p>
-								<div key={population.label}>
-									{population.data.map((datum) => (
-										<div key={datum.year}>
-											<p>
-												{datum.year}年: {datum.value}人
-											</p>
-										</div>
-									))}
-								</div>
-							</>
-						))}
-					</div>
-				))}
+			<Card className="p-3 mt-4 h-96">
+				<PopulationChart
+					data={transformedData[PopulationCategory.TotalPopulation]}
+					xKey={"year"}
+					lineKeys={prefCodes}
+				/>{" "}
 			</Card>
 		</>
 	);
