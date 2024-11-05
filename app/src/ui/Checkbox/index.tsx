@@ -2,30 +2,29 @@
 
 import { useState } from "react";
 
-export interface CheckboxProps extends React.HTMLAttributes<HTMLInputElement> {
-	name: string;
-	value: string;
-	defaultChecked?: boolean;
-}
+const Checkbox: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (
+	props,
+) => {
+	const [isChecked, setIsChecked] = useState(props.defaultChecked);
 
-const Checkbox: React.FC<CheckboxProps> = ({ name, value, defaultChecked }) => {
-	const [isChecked, setIsChecked] = useState(defaultChecked ?? false);
-
+	const handleToggle = () => {
+		setIsChecked((prev) => !prev);
+	};
 	return (
-		<div className="relative">
+		<div className="">
 			<input
 				type="checkbox"
-				id="neumorphic-checkbox"
-				name={name}
-				value={value}
-				checked={isChecked}
-				onChange={() => setIsChecked(!isChecked)}
+				id={props.id}
+				name={props.name}
+				value={props.value}
+				defaultChecked={props.defaultChecked}
+				onChange={handleToggle}
 				className="sr-only peer"
 			/>
 			<label
-				htmlFor="neumorphic-checkbox"
+				htmlFor={props.id}
 				className={`
-            flex items-center justify-center w-[50px] h-[50px] rounded-[10px] cursor-pointer
+            flex items-center justify-center w-7 h-7 rounded cursor-pointer
             transition-all duration-200
             ${
 							isChecked
@@ -35,7 +34,7 @@ const Checkbox: React.FC<CheckboxProps> = ({ name, value, defaultChecked }) => {
           `}
 			>
 				{isChecked && (
-					<span className="text-white text-3xl font-bold select-none">✓</span>
+					<span className="text-white text-lg font-bold select-none">✓</span>
 				)}
 			</label>
 		</div>
