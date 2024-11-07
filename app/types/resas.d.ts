@@ -31,5 +31,4 @@ export interface ResasResponse<T> {
 }
 export interface FetchPopulationOptions {
 	prefCode: string;
-	addArea?: string; // "1_,13_" や "1_01100,13_13101" などの形式で複数エリアを指定
 }
