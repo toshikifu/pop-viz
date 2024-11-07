@@ -40,6 +40,14 @@ export default function Index() {
 		return prefectures.at(index)?.prefName;
 	};
 
+	const getPrefNameByCode = (prefCode: string) => {
+		console.log(prefCode);
+		return (
+			prefectures.find((pref) => Number(pref.prefCode) === Number(prefCode))
+				?.prefName || prefCode
+		);
+	};
+
 	const transformedData = transformPopulationData(
 		prefCodes,
 		populationData || [],
@@ -76,11 +84,12 @@ export default function Index() {
 			</Form>
 
 			<h2 className="mt-6 text-4xl">人口推移グラフ</h2>
-			<Card className="p-3 mt-4 h-96">
+			<Card className="p-4 mt-4 h-96">
 				<PopulationChart
 					data={transformedData[PopulationCategory.TotalPopulation]}
 					xKey={"year"}
 					lineKeys={prefCodes}
+					legendFormatter={getPrefNameByCode}
 				/>{" "}
 			</Card>
 		</>
