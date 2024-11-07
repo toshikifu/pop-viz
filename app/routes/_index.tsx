@@ -4,11 +4,13 @@ import {
 	useLoaderData,
 	useSearchParams,
 } from "@remix-run/react";
+import { useState } from "react";
 import { fetchPopulationComposition, fetchPrefectures } from "~/api/resasApi";
 import Button from "~/src/ui/Button";
 import Card from "~/src/ui/Card";
 import Checkbox from "~/src/ui/Checkbox";
 import PopulationChart from "~/src/views/PopulationChart";
+import Select from "~/src/views/Select";
 import {
 	PopulationCategory,
 	transformPopulationData,
@@ -36,8 +38,12 @@ export default function Index() {
 	const [searchParams] = useSearchParams();
 	const prefCodes = searchParams.getAll("prefCode");
 
-	const getPrefNameByIndex = (index: number) => {
-		return prefectures.at(index)?.prefName;
+	const [selectedCategory, setSelectedCategory] = useState<PopulationCategory>(
+		PopulationCategory.TotalPopulation,
+	);
+
+	const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setSelectedCategory(e.target.value as PopulationCategory);
 	};
 
 	const getPrefNameByCode = (prefCode: string) => {
@@ -83,10 +89,16 @@ export default function Index() {
 				</div>
 			</Form>
 
-			<h2 className="mt-6 text-4xl">人口推移グラフ</h2>
+			<div className="flex items-center mt-6 gap-4">
+				<h2 className="text-4xl">人口推移グラフ</h2>
+				<div className="flex items-center gap-2">
+					<h3 className="text-lg">表示カテゴリ: </h3>
+					<Select value={selectedCategory} onChange={handleCategoryChange} />
+				</div>
+			</div>
 			<Card className="p-4 mt-4 h-96">
 				<PopulationChart
-					data={transformedData[PopulationCategory.TotalPopulation]}
+					data={transformedData[selectedCategory]}
 					xKey={"year"}
 					lineKeys={prefCodes}
 					legendFormatter={getPrefNameByCode}
