@@ -16,18 +16,12 @@ export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
 
 	const prefCodes = searchParams.getAll("prefCode");
 
-	const prefCode = prefCodes.shift();
-
-	const addArea = prefCodes.length
-		? prefCodes.map((code) => `${code}_`).join(",")
-		: undefined;
-
-	if (prefCode) {
-		const populationData = await fetchPopulationComposition({
-			prefCode,
-			addArea,
-		});
-		return { prefectures, populationData };
+	if (prefCodes) {
+		const requests = prefCodes.map((prefCode) =>
+			fetchPopulationComposition({ prefCode }),
+		);
+		const responses = await Promise.all(requests);
+		return { prefectures, populationData: responses };
 	}
 	return { prefectures };
 };
@@ -35,6 +29,11 @@ export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
 export default function Index() {
 	const { prefectures, populationData } = useLoaderData<typeof clientLoader>();
 	const [searchParams] = useSearchParams();
+	const prefCodes = searchParams.getAll("prefCode");
+
+	const getPrefNameByIndex = (index: number) => {
+		return prefectures.at(index)?.prefName;
+	};
 	return (
 		<>
 			<Form method="get">
@@ -56,9 +55,9 @@ export default function Index() {
 								name="prefCode"
 								id={prefecture.prefCode}
 								value={prefecture.prefCode}
-								defaultChecked={searchParams
-									.getAll("prefCode")
-									.includes(prefecture.prefCode.toString())}
+								defaultChecked={prefCodes.includes(
+									prefecture.prefCode.toString(),
+								)}
 							/>
 							<p>{prefecture.prefName}</p>
 						</label>
@@ -68,15 +67,24 @@ export default function Index() {
 
 			<h2 className="mt-6 text-4xl">人口推移グラフ</h2>
 			<Card className="p-3">
-				{populationData?.data.map((data) => (
-					<div key={data.label}>
-						<h2>{data.label}</h2>
-						{data.data.map((item) => (
-							<div key={item.year}>
-								<h3>{item.year}</h3>
-								<p>{item.value}</p>
-								<p>{item.rate}</p>
-							</div>
+				{populationData?.map((data, index) => (
+					<div key={data.boundaryYear}>
+						<h3 className="text-2xl">
+							{getPrefNameByIndex(index)} - {data.data[0].label}
+						</h3>
+						{data.data.map((population) => (
+							<>
+								<p key={population.label}>{population.label}</p>
+								<div key={population.label}>
+									{population.data.map((datum) => (
+										<div key={datum.year}>
+											<p>
+												{datum.year}年: {datum.value}人
+											</p>
+										</div>
+									))}
+								</div>
+							</>
 						))}
 					</div>
 				))}

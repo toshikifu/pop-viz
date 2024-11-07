@@ -20,7 +20,6 @@ export const fetchPrefectures = async (): Promise<Prefecture[]> => {
 
 export const fetchPopulationComposition = async ({
 	prefCode,
-	addArea,
 }: FetchPopulationOptions): Promise<PopulationCompositionResponse> => {
 	try {
 		const response = await axiosClient.get<
@@ -28,7 +27,6 @@ export const fetchPopulationComposition = async ({
 		>("/population/composition/perYear", {
 			params: {
 				prefCode,
-				addArea,
 			},
 		});
 		return response.data.result;
