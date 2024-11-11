@@ -96,16 +96,22 @@ export default function Index() {
 					<Select value={selectedCategory} onChange={handleCategoryChange} />
 				</div>
 			</div>
-			<Card className="p-4 mt-4 h-96">
-				<PopulationChart
-					data={transformedData[selectedCategory]}
-					xKey={"year"}
-					lineKeys={prefCodes}
-					legendFormatter={getPrefNameByCode}
-					tooltip={
-						<PopulationChartTooltip getPrefNameByCode={getPrefNameByCode} />
-					}
-				/>
+			<Card className="p-4 mt-4 h-96 relative">
+				{transformedData[selectedCategory].length ? (
+					<PopulationChart
+						data={transformedData[selectedCategory]}
+						xKey={"year"}
+						lineKeys={prefCodes}
+						legendFormatter={getPrefNameByCode}
+						tooltip={
+							<PopulationChartTooltip getPrefNameByCode={getPrefNameByCode} />
+						}
+					/>
+				) : (
+					<div className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4">
+						<p>データがありません</p>
+					</div>
+				)}
 			</Card>
 		</>
 	);
