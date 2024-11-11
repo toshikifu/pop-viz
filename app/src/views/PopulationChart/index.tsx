@@ -10,12 +10,18 @@ import {
 	XAxis,
 	YAxis,
 } from "recharts";
+import type {
+	NameType,
+	ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
+import type { ContentType } from "recharts/types/component/Tooltip";
 
 export interface PopulationChartProps<T> {
 	data: T[];
 	xKey: keyof T;
 	lineKeys: Array<keyof T>;
 	legendFormatter?: (value: string) => string;
+	tooltip?: ContentType<ValueType, NameType>;
 }
 
 const PopulationChart = <T,>({
@@ -23,6 +29,7 @@ const PopulationChart = <T,>({
 	xKey,
 	lineKeys,
 	legendFormatter = (value) => value,
+	tooltip,
 }: PopulationChartProps<T>) => {
 	const [stroke, setStroke] = useState<{ [key: string]: number }>({
 		...Object.fromEntries(lineKeys.map((key) => [String(key), 1])),
@@ -60,7 +67,7 @@ const PopulationChart = <T,>({
 				<YAxis>
 					<Label value="人口" position="top" offset={20} />
 				</YAxis>
-				<Tooltip />
+				{tooltip ? <Tooltip content={tooltip} /> : null}
 				<Legend
 					layout="vertical"
 					align="right"

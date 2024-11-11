@@ -10,6 +10,7 @@ import Button from "~/src/ui/Button";
 import Card from "~/src/ui/Card";
 import Checkbox from "~/src/ui/Checkbox";
 import PopulationChart from "~/src/views/PopulationChart";
+import PopulationChartTooltip from "~/src/views/PopulationChart/components/PopulationChartTooltip";
 import Select from "~/src/views/Select";
 import {
 	PopulationCategory,
@@ -47,7 +48,6 @@ export default function Index() {
 	};
 
 	const getPrefNameByCode = (prefCode: string) => {
-		console.log(prefCode);
 		return (
 			prefectures.find((pref) => Number(pref.prefCode) === Number(prefCode))
 				?.prefName || prefCode
@@ -102,6 +102,9 @@ export default function Index() {
 					xKey={"year"}
 					lineKeys={prefCodes}
 					legendFormatter={getPrefNameByCode}
+					tooltip={
+						<PopulationChartTooltip getPrefNameByCode={getPrefNameByCode} />
+					}
 				/>{" "}
 			</Card>
 		</>
