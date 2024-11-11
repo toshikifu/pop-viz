@@ -18,6 +18,10 @@ const PopulationChartTooltip = ({
 		return (
 			<div
 				className={`
+				grid
+				grid-rows-6
+				grid-flow-col
+				gap-4
 				p-4
 				bg-gradient-to-r 
 				from-black/40 
@@ -31,11 +35,12 @@ const PopulationChartTooltip = ({
 				appearance-none
 			`}
 			>
-				<p>{label}年</p>
+				<h1 className="font-bold">{label}年</h1>
 				{payload.map((p) => {
 					return (
 						<p key={p.dataKey} style={{ color: p.color }}>
-							{getPrefNameByCode(p.dataKey as string)}: {p.value}
+							{getPrefNameByCode(p.dataKey as string)}:{" "}
+							{Number(p.value).toLocaleString()}
 						</p>
 					);
 				})}

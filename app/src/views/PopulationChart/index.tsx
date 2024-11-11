@@ -56,7 +56,8 @@ const PopulationChart = <T,>({
 				height={300}
 				margin={{
 					top: 40,
-					left: 20,
+					left: 40,
+					right: 10,
 					bottom: 15,
 				}}
 			>
@@ -64,24 +65,26 @@ const PopulationChart = <T,>({
 				<XAxis dataKey={String(xKey)}>
 					<Label value="年次" offset={-10} position="insideBottom" />
 				</XAxis>
-				<YAxis>
-					<Label value="人口" position="top" offset={20} />
+				<YAxis tickFormatter={(value: number) => value.toLocaleString()}>
+					<Label value="人口(人)" position="top" offset={20} />
 				</YAxis>
 				{tooltip ? <Tooltip content={tooltip} /> : null}
 				<Legend
-					layout="vertical"
-					align="right"
-					verticalAlign="middle"
+					layout="horizontal"
+					align="center"
+					verticalAlign="bottom"
 					formatter={legendFormatter}
 					onMouseEnter={handleMouseEnter}
 					onMouseLeave={handleMouseLeave}
+					wrapperStyle={{
+						bottom: 0,
+					}}
 				/>
 				{lineKeys.map((key, index) => (
 					<Line
 						key={String(key)}
 						type="monotone"
 						dataKey={String(key)}
-						stroke={index % 2 === 0 ? "#8884d8" : "#82ca9d"}
 						activeDot={{ r: 8 }}
 						strokeWidth={stroke[String(key)]}
 					/>
