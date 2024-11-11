@@ -5,9 +5,14 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useRouteError,
 } from "@remix-run/react";
 
 import "./tailwind.css";
+
+import ErrorIcon from "~/ErrorIcon";
+import LoadingIcon from "~/LoadingIcon";
+import IconBadge from "~/src/ui/IconBadge";
 
 export const links: LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -24,7 +29,7 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="ja">
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,5 +50,42 @@ export default function App() {
 }
 
 export function HydrateFallback() {
-	return <p>Loading...</p>;
+	return (
+		<html lang="ja">
+			<head>
+				<title>pop-viz loading...</title>
+				<Meta />
+				<Links />
+			</head>
+			<body className="absolute flex items-center gap-4 top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4">
+				<IconBadge>
+					<LoadingIcon />
+				</IconBadge>
+				<div>ローディング中です．</div>
+
+				<Scripts />
+			</body>
+		</html>
+	);
+}
+export function ErrorBoundary() {
+	const error = useRouteError();
+	console.error(error);
+	return (
+		<html lang="ja">
+			<head>
+				<title>エラーが発生しました</title>
+				<Meta />
+				<Links />
+			</head>
+			<body className="absolute flex items-center gap-4 top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4">
+				<IconBadge>
+					<ErrorIcon />
+				</IconBadge>
+				<div>予期せぬエラーが発生しました．</div>
+
+				<Scripts />
+			</body>
+		</html>
+	);
 }
