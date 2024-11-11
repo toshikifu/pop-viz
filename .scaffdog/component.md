@@ -2,7 +2,7 @@
 name: 'component'
 description: "Generate standard React component."
 root: '.'
-output: 'app/*'
+output: 'app/**/*'
 questions:
   name: 'Please enter a component name.'
 ---
