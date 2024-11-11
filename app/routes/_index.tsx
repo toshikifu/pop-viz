@@ -105,7 +105,7 @@ export default function Index() {
 					tooltip={
 						<PopulationChartTooltip getPrefNameByCode={getPrefNameByCode} />
 					}
-				/>{" "}
+				/>
 			</Card>
 		</>
 	);
